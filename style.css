@@ -8,36 +8,28 @@
     background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%);
 }
 
-.input-field {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    outline: none;
+.ice-cream-shadow {
+    box-shadow: 0 10px 30px rgba(253, 121, 168, 0.3);
 }
 
-.input-field:focus {
-    border-color: #fd79a8;
+.floating {
+    animation: floating 3s ease-in-out infinite;
 }
 
-.btn-primary {
-    background-color: #fd79a8;
-    color: white;
-    padding: 12px;
-    border-radius: 12px;
-    font-weight: bold;
+@keyframes floating {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
 }
 
-.btn-primary:hover {
-    background-color: #e84393;
+.cart-bounce {
+    animation: bounce 0.5s ease-in-out;
 }
 
-.info-card {
-    background-color: #fff;
-    padding: 16px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
+
+.custom-scrollbar::-webkit-scrollbar { width: 8px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #fd79a8; border-radius: 10px; }
