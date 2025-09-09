@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelato Dreams - Sorveteria</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gradient-to-br from-pink-50 to-yellow-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="text-3xl">🍦</div>
+                <h1 class="text-2xl font-bold text-pink-600">Gelato Dreams</h1>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link">Início</a>
+                <a href="#products" class="nav-link">Produtos</a>
+                <a href="#promotions" class="nav-link">Promoções</a>
+                <a href="#contact" class="nav-link">Contato</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="cart-btn" class="relative bg-pink-500 text-white px-4 py-2 rounded-full">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-yellow-400 text-pink-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">0</span>
+                </button>
+                <button id="mobile-menu" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-nav" class="hidden md:hidden bg-white shadow-lg">
+        <div class="px-4 py-2 space-y-2">
+            <a href="#home" class="block py-2">Início</a>
+            <a href="#products" class="block py-2">Produtos</a>
+            <a href="#promotions" class="block py-2">Promoções</a>
+            <a href="#contact" class="block py-2">Contato</a>
+        </div>
+    </div>
+
+    <!-- Home Section -->
+    <section id="home" class="gradient-bg py-20 text-center">
+        <h2 class="text-5xl md:text-7xl font-bold text-white mb-6">Sabores que <span class="text-yellow-300">Encantam</span></h2>
+        <p class="text-xl text-white mb-8 max-w-2xl mx-auto">Descubra nossa incrível variedade de sorvetes artesanais feitos com ingredientes premium</p>
+        <button onclick="scrollToSection('products')" class="bg-white text-pink-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-yellow-100 transition-colors">Ver Sabores 🍨</button>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-gray-800 text-center mb-8">Nossos Sabores</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="products-grid">
+                <!-- Produtos carregados via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section id="promotions" class="py-20 bg-gradient-to-r from-pink-100 to-yellow-100">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Promoções Especiais</h2>
+            <p class="text-xl text-gray-600 mb-12">Ofertas imperdíveis toda semana!</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="promotions-grid">
+                <!-- Promoções carregadas via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-gray-800 text-center mb-8">Entre em Contato</h2>
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Formulário -->
+                <div class="flex-1 bg-gradient-to-br from-pink-50 to-yellow-50 rounded-3xl p-8">
+                    <h3 class="text-2xl font-bold mb-6">Envie sua Mensagem</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <input type="text" id="contact-name" placeholder="Nome completo" class="input-field">
+                        <input type="email" id="contact-email" placeholder="Seu email" class="input-field">
+                        <textarea id="contact-message" rows="4" placeholder="Sua mensagem..." class="input-field"></textarea>
+                        <button type="submit" class="btn-primary w-full">Enviar Mensagem 💌</button>
+                    </form>
+                </div>
+                <!-- Informações -->
+                <div class="flex-1 space-y-8">
+                    <div class="info-card"><i class="fas fa-map-marker-alt"></i> Rua das Delícias, 123 - SP</div>
+                    <div class="info-card"><i class="fas fa-phone"></i> (11) 9999-8888</div>
+                    <div class="info-card"><i class="fas fa-clock"></i> Seg-Dom: 10h às 22h</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 text-center">
+        <p>&copy; 2024 Gelato Dreams. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="firebase/config.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
