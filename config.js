@@ -1,4 +1,4 @@
-// Configuração do Firebase
+// Configuração Firebase (substitua com a sua)
 const firebaseConfig = {
     apiKey: "SUA_API_KEY",
     authDomain: "SEU_AUTH_DOMAIN",
@@ -8,19 +8,21 @@ const firebaseConfig = {
     appId: "SEU_APP_ID"
 };
 
-// Inicialização
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-// Funções de demo
-function saveContact(data){
-    db.collection('contacts').add(data)
-      .then(()=>console.log('Contato salvo no Firebase'))
-      .catch(e=>console.error(e));
+let db;
+try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+} catch (error) {
+    console.log('Firebase demo mode');
 }
 
-function saveOrder(data){
-    db.collection('orders').add(data)
-      .then(()=>console.log('Pedido salvo no Firebase'))
-      .catch(e=>console.error(e));
+// Funções
+export function saveOrder(orderData){
+    if(db) db.collection('orders').add(orderData);
+    console.log('Order saved:', orderData);
+}
+
+export function saveContact(contactData){
+    if(db) db.collection('contacts').add(contactData);
+    console.log('Contact saved:', contactData);
 }
