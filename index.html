@@ -1,97 +1,234 @@
+<!-- Salve como: index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gelato Dreams - Sorveteria</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gelato Dreams - Sorveteria</title>
+
+  <!-- Fonte e ícones -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <!-- CSS local -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Firebase compat (usamos compat aqui para simplicidade) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
-<body class="bg-gradient-to-br from-pink-50 to-yellow-50">
+<body>
 
-    <!-- Header -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
-        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="text-3xl">🍦</div>
-                <h1 class="text-2xl font-bold text-pink-600">Gelato Dreams</h1>
-            </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="nav-link text-gray-700 hover:text-pink-600">Início</a>
-                <a href="#products" class="nav-link text-gray-700 hover:text-pink-600">Produtos</a>
-                <a href="#promotions" class="nav-link text-gray-700 hover:text-pink-600">Promoções</a>
-                <a href="#contact" class="nav-link text-gray-700 hover:text-pink-600">Contato</a>
-            </div>
-            <div class="flex items-center space-x-4">
-                <button id="cart-btn" class="relative bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition-colors">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-yellow-400 text-pink-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">0</span>
-                </button>
-                <button id="mobile-menu" class="md:hidden text-gray-700"><i class="fas fa-bars text-xl"></i></button>
-            </div>
-        </nav>
-    </header>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="assets/logo.png" alt="Logo Gelato Dreams" class="logo">
+        <h1>Gelato Dreams</h1>
+      </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-nav" class="hidden md:hidden bg-white shadow-lg">
-        <div class="px-4 py-2 space-y-2">
-            <a href="#home" class="block py-2 text-gray-700 hover:text-pink-600">Início</a>
-            <a href="#products" class="block py-2 text-gray-700 hover:text-pink-600">Produtos</a>
-            <a href="#promotions" class="block py-2 text-gray-700 hover:text-pink-600">Promoções</a>
-            <a href="#contact" class="block py-2 text-gray-700 hover:text-pink-600">Contato</a>
-        </div>
+      <nav class="nav">
+        <button class="nav-btn" data-target="home">Início</button>
+        <button class="nav-btn" data-target="catalog">Catálogo</button>
+        <button class="nav-btn" data-target="promotions">Promoções</button>
+        <button class="nav-btn" data-target="contact">Contato</button>
+      </nav>
+
+      <div class="header-actions">
+        <button id="cart-btn" title="Ver carrinho">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count">0</span>
+        </button>
+        <button id="mobile-toggle" class="mobile-only"><i class="fas fa-bars"></i></button>
+      </div>
     </div>
 
-    <!-- Sections -->
-    <section id="home" class="gradient-bg py-20 text-center">
-        <h2 class="text-5xl md:text-7xl font-bold text-white mb-6 floating">Sabores que <span class="text-yellow-300">Encantam</span></h2>
-        <p class="text-xl text-white mb-8 max-w-2xl mx-auto">Descubra nossa incrível variedade de sorvetes artesanais feitos com ingredientes premium</p>
-        <button onclick="scrollToSection('products')" class="bg-white text-pink-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-yellow-100 transition-colors ice-cream-shadow">Ver Sabores 🍨</button>
-    </section>
+    <!-- mobile menu -->
+    <div id="mobile-menu" class="mobile-menu">
+      <button class="close-mobile" id="close-mobile"><i class="fas fa-times"></i></button>
+      <nav class="mobile-nav">
+        <button class="nav-btn" data-target="home">Início</button>
+        <button class="nav-btn" data-target="catalog">Catálogo</button>
+        <button class="nav-btn" data-target="promotions">Promoções</button>
+        <button class="nav-btn" data-target="contact">Contato</button>
+      </nav>
+    </div>
+  </header>
 
-    <section id="products" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">Nossos Sabores</h2>
-                <p class="text-xl text-gray-600">Escolha entre mais de 20 sabores deliciosos</p>
+  <!-- MAIN PAGES -->
+  <main>
+
+    <!-- HOME -->
+    <section id="home" class="page active">
+      <div class="hero gradient-bg">
+        <div class="hero-inner container">
+          <div class="hero-left">
+            <h2 class="hero-title">GELATO EVERY DAY!</h2>
+            <p class="hero-sub">Sabores artesanais, cremosos e coloridos — feitos com carinho.</p>
+            <div class="hero-ctas">
+              <button class="btn btn-primary" data-target="catalog">Ver Catálogo</button>
+              <button class="btn btn-outline" data-target="promotions">Promoções</button>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="products-grid">
-                <!-- Produtos carregados via JS -->
+
+            <div class="socials">
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-whatsapp"></i></a>
             </div>
+          </div>
+
+          <div class="hero-right">
+            <!-- Imagem grande do sorvete -->
+            <!-- COLOQUE A IMAGEM DO HERO AQUI: assets/hero-icecream.png -->
+            <img src="assets/hero-icecream.png" alt="Sorvete" class="hero-image floating">
+          </div>
         </div>
+      </div>
+
+      <!-- Featured flavors -->
+      <section class="featured container">
+        <h3>Sabores Especiais da Semana</h3>
+        <div class="grid featured-grid" id="featured-grid">
+          <!-- Os cards serão preenchidos por JS (produtos em destaque) -->
+        </div>
+      </section>
     </section>
 
-    <section id="promotions" class="py-20 bg-gradient-to-r from-pink-100 to-yellow-100">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">Promoções Especiais</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="promotions-grid">
-                <!-- Promoções carregadas via JS -->
-            </div>
+    <!-- CATALOG -->
+    <section id="catalog" class="page">
+      <div class="container">
+        <h2>Nosso Catálogo</h2>
+
+        <div class="filters">
+          <button class="filter active" data-filter="all">Todos</button>
+          <button class="filter" data-filter="cremoso">Cremosos</button>
+          <button class="filter" data-filter="frutas">Frutas</button>
+          <button class="filter" data-filter="especiais">Especiais</button>
         </div>
+
+        <div id="products-grid" class="grid products-grid">
+          <!-- Produtos carregados por JS -->
+        </div>
+      </div>
     </section>
 
-    <section id="contact" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-gray-800 text-center mb-8">Entre em Contato</h2>
-            <form id="contact-form" class="max-w-xl mx-auto space-y-6">
-                <input type="text" id="contact-name" placeholder="Nome" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:outline-none">
-                <input type="email" id="contact-email" placeholder="Email" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:outline-none">
-                <textarea id="contact-message" rows="4" placeholder="Mensagem" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:outline-none"></textarea>
-                <button type="submit" class="w-full bg-pink-500 text-white py-3 rounded-xl font-semibold hover:bg-pink-600 transition-colors">Enviar Mensagem 💌</button>
-            </form>
+    <!-- PROMOTIONS -->
+    <section id="promotions" class="page">
+      <div class="container">
+        <h2>Promoções & Banners</h2>
+
+        <div class="promotions-grid">
+          <div class="promo-card">
+            <h3>Combo Família</h3>
+            <p>4 sorvetes + 2 casquinhas por R$25</p>
+          </div>
+
+          <div class="promo-card">
+            <h3>Happy Hour</h3>
+            <p>Seg a Sex | 14h–16h | 30% OFF</p>
+          </div>
+
+          <div class="promo-banner">
+            <!-- Banner criativo: COLOQUE A IMAGEM DO BANNER EM assets/promo-banner.png -->
+            <img src="assets/promo-banner.png" alt="Promoção">
+          </div>
         </div>
+
+        <div class="weekly-highlights">
+          <h4>Destaques da Semana</h4>
+          <ul>
+            <li>Segunda: Sabores frutados -20%</li>
+            <li>Quarta: Compre 1 leve 2 (especiais)</li>
+            <li>Sexta: Casquinha grátis na compra de 2</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 Gelato Dreams. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+    <!-- CART -->
+    <section id="cart" class="page">
+      <div class="container">
+        <h2>Seu Carrinho</h2>
 
-    <!-- Scripts -->
-    <script src="firebase/firebase.js"></script>
-    <script src="js/main.js"></script>
+        <div id="cart-items" class="cart-items">
+          <!-- Itens do carrinho carregados por JS -->
+        </div>
+
+        <div class="cart-summary">
+          <div>Total: <span id="cart-total">R$ 0,00</span></div>
+          <button id="checkout-btn" class="btn btn-primary">Finalizar Pedido</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="page">
+      <div class="container contact-grid">
+        <div class="contact-form">
+          <h2>Contato</h2>
+          <form id="contact-form">
+            <label>Nome<input type="text" id="c-name" required></label>
+            <label>Email<input type="email" id="c-email" required></label>
+            <label>Mensagem<textarea id="c-msg" rows="4" required></textarea></label>
+            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+          </form>
+        </div>
+
+        <div class="contact-info">
+          <h3>Nosso Endereço</h3>
+          <p>Rua das Delícias, 123 — Centro</p>
+          <p>Tel: (11) 9999-8888</p>
+
+          <h3>Mapa</h3>
+          <!-- Substitua por iframe do Google Maps real -->
+          <div class="map-placeholder">Mapa Interativo (substitua por iframe do Google Maps)</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <img src="assets/logo.png" alt="Logo" class="footer-logo">
+        <p>Sabores artesanais que despertam sorrisos desde 2020.</p>
+      </div>
+
+      <div>
+        <h4>Links rápidos</h4>
+        <ul>
+          <li><button class="nav-btn" data-target="home">Início</button></li>
+          <li><button class="nav-btn" data-target="catalog">Catálogo</button></li>
+          <li><button class="nav-btn" data-target="promotions">Promoções</button></li>
+          <li><button class="nav-btn" data-target="contact">Contato</button></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contato</h4>
+        <p>(11) 9999-8888</p>
+        <p>contato@gelatodreams.com</p>
+      </div>
+
+      <div>
+        <h4>Redes</h4>
+        <div class="socials">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; <span id="year"></span> Gelato Dreams. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- scripts -->
+  <script src="firebase-config.js"></script> <!-- coloque sua config do firebase aqui -->
+  <script src="app.js"></script>
 </body>
 </html>
