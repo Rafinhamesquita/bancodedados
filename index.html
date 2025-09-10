@@ -1,234 +1,111 @@
-<!-- Salve como: index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gelato Dreams - Sorveteria</title>
-
-  <!-- Fonte e ícones -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-  <!-- CSS local -->
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- Firebase compat (usamos compat aqui para simplicidade) -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorveteria - Delícias Geladas</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <img src="assets/logo.png" alt="Logo Gelato Dreams" class="logo">
-        <h1>Gelato Dreams</h1>
-      </div>
-
-      <nav class="nav">
-        <button class="nav-btn" data-target="home">Início</button>
-        <button class="nav-btn" data-target="catalog">Catálogo</button>
-        <button class="nav-btn" data-target="promotions">Promoções</button>
-        <button class="nav-btn" data-target="contact">Contato</button>
-      </nav>
-
-      <div class="header-actions">
-        <button id="cart-btn" title="Ver carrinho">
-          <i class="fas fa-shopping-cart"></i>
-          <span id="cart-count">0</span>
-        </button>
-        <button id="mobile-toggle" class="mobile-only"><i class="fas fa-bars"></i></button>
-      </div>
-    </div>
-
-    <!-- mobile menu -->
-    <div id="mobile-menu" class="mobile-menu">
-      <button class="close-mobile" id="close-mobile"><i class="fas fa-times"></i></button>
-      <nav class="mobile-nav">
-        <button class="nav-btn" data-target="home">Início</button>
-        <button class="nav-btn" data-target="catalog">Catálogo</button>
-        <button class="nav-btn" data-target="promotions">Promoções</button>
-        <button class="nav-btn" data-target="contact">Contato</button>
-      </nav>
-    </div>
+  <!-- ===== HEADER / MENU ===== -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="login.html">Conta</a></li> <!-- 🔗 Link para login -->
+      </ul>
+    </nav>
   </header>
 
-  <!-- MAIN PAGES -->
-  <main>
+  <!-- ===== INÍCIO ===== -->
+  <section id="inicio" class="section">
+    <h1>Bem-vindo à Sorveteria Delícias Geladas 🍨</h1>
+    <p>Os melhores sorvetes para se refrescar e se apaixonar!</p>
+  </section>
 
-    <!-- HOME -->
-    <section id="home" class="page active">
-      <div class="hero gradient-bg">
-        <div class="hero-inner container">
-          <div class="hero-left">
-            <h2 class="hero-title">GELATO EVERY DAY!</h2>
-            <p class="hero-sub">Sabores artesanais, cremosos e coloridos — feitos com carinho.</p>
-            <div class="hero-ctas">
-              <button class="btn btn-primary" data-target="catalog">Ver Catálogo</button>
-              <button class="btn btn-outline" data-target="promotions">Promoções</button>
-            </div>
+  <!-- ===== SOBRE ===== -->
+  <section id="sobre" class="section">
+    <h2>Sobre Nós</h2>
+    <p>
+      A <strong>Delícias Geladas</strong> nasceu da paixão por sabores únicos e
+      experiências refrescantes. Trabalhamos com ingredientes selecionados para
+      oferecer sorvetes de qualidade, em diversos tamanhos e formatos.
+    </p>
+    <p>
+      Nosso objetivo é levar felicidade em cada colherada, seja em uma casquinha
+      na loja ou em um pote para compartilhar em casa.
+    </p>
+  </section>
 
-            <div class="socials">
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-facebook"></i></a>
-              <a href="#"><i class="fab fa-whatsapp"></i></a>
-            </div>
-          </div>
+  <!-- ===== PRODUTOS ===== -->
+  <section id="produtos" class="section">
+    <h2>Nossos Produtos</h2>
+    <div class="produtos-grid">
 
-          <div class="hero-right">
-            <!-- Imagem grande do sorvete -->
-            <!-- COLOQUE A IMAGEM DO HERO AQUI: assets/hero-icecream.png -->
-            <img src="assets/hero-icecream.png" alt="Sorvete" class="hero-image floating">
-          </div>
-        </div>
+      <!-- ⚠️ Apenas POTES e BALDES terão botão de comprar -->
+      <div class="produto">
+        <img src="img/pote1l.jpg" alt="Pote 1L">
+        <h3>Pote 1 Litro</h3>
+        <p>R$ 25,00</p>
+        <a href="login.html" class="btn">Comprar</a>
       </div>
 
-      <!-- Featured flavors -->
-      <section class="featured container">
-        <h3>Sabores Especiais da Semana</h3>
-        <div class="grid featured-grid" id="featured-grid">
-          <!-- Os cards serão preenchidos por JS (produtos em destaque) -->
-        </div>
-      </section>
-    </section>
-
-    <!-- CATALOG -->
-    <section id="catalog" class="page">
-      <div class="container">
-        <h2>Nosso Catálogo</h2>
-
-        <div class="filters">
-          <button class="filter active" data-filter="all">Todos</button>
-          <button class="filter" data-filter="cremoso">Cremosos</button>
-          <button class="filter" data-filter="frutas">Frutas</button>
-          <button class="filter" data-filter="especiais">Especiais</button>
-        </div>
-
-        <div id="products-grid" class="grid products-grid">
-          <!-- Produtos carregados por JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- PROMOTIONS -->
-    <section id="promotions" class="page">
-      <div class="container">
-        <h2>Promoções & Banners</h2>
-
-        <div class="promotions-grid">
-          <div class="promo-card">
-            <h3>Combo Família</h3>
-            <p>4 sorvetes + 2 casquinhas por R$25</p>
-          </div>
-
-          <div class="promo-card">
-            <h3>Happy Hour</h3>
-            <p>Seg a Sex | 14h–16h | 30% OFF</p>
-          </div>
-
-          <div class="promo-banner">
-            <!-- Banner criativo: COLOQUE A IMAGEM DO BANNER EM assets/promo-banner.png -->
-            <img src="assets/promo-banner.png" alt="Promoção">
-          </div>
-        </div>
-
-        <div class="weekly-highlights">
-          <h4>Destaques da Semana</h4>
-          <ul>
-            <li>Segunda: Sabores frutados -20%</li>
-            <li>Quarta: Compre 1 leve 2 (especiais)</li>
-            <li>Sexta: Casquinha grátis na compra de 2</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- CART -->
-    <section id="cart" class="page">
-      <div class="container">
-        <h2>Seu Carrinho</h2>
-
-        <div id="cart-items" class="cart-items">
-          <!-- Itens do carrinho carregados por JS -->
-        </div>
-
-        <div class="cart-summary">
-          <div>Total: <span id="cart-total">R$ 0,00</span></div>
-          <button id="checkout-btn" class="btn btn-primary">Finalizar Pedido</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="page">
-      <div class="container contact-grid">
-        <div class="contact-form">
-          <h2>Contato</h2>
-          <form id="contact-form">
-            <label>Nome<input type="text" id="c-name" required></label>
-            <label>Email<input type="email" id="c-email" required></label>
-            <label>Mensagem<textarea id="c-msg" rows="4" required></textarea></label>
-            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
-          </form>
-        </div>
-
-        <div class="contact-info">
-          <h3>Nosso Endereço</h3>
-          <p>Rua das Delícias, 123 — Centro</p>
-          <p>Tel: (11) 9999-8888</p>
-
-          <h3>Mapa</h3>
-          <!-- Substitua por iframe do Google Maps real -->
-          <div class="map-placeholder">Mapa Interativo (substitua por iframe do Google Maps)</div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <img src="assets/logo.png" alt="Logo" class="footer-logo">
-        <p>Sabores artesanais que despertam sorrisos desde 2020.</p>
+      <div class="produto">
+        <img src="img/pote15l.jpg" alt="Pote 1,5L">
+        <h3>Pote 1,5 Litro</h3>
+        <p>R$ 35,00</p>
+        <a href="login.html" class="btn">Comprar</a>
       </div>
 
-      <div>
-        <h4>Links rápidos</h4>
-        <ul>
-          <li><button class="nav-btn" data-target="home">Início</button></li>
-          <li><button class="nav-btn" data-target="catalog">Catálogo</button></li>
-          <li><button class="nav-btn" data-target="promotions">Promoções</button></li>
-          <li><button class="nav-btn" data-target="contact">Contato</button></li>
-        </ul>
+      <div class="produto">
+        <img src="img/pote2l.jpg" alt="Pote 2L">
+        <h3>Pote 2 Litros</h3>
+        <p>R$ 45,00</p>
+        <a href="login.html" class="btn">Comprar</a>
       </div>
 
-      <div>
-        <h4>Contato</h4>
-        <p>(11) 9999-8888</p>
-        <p>contato@gelatodreams.com</p>
+      <div class="produto">
+        <img src="img/balde.jpg" alt="Balde de Sorvete">
+        <h3>Balde de Sorvete</h3>
+        <p>R$ 80,00</p>
+        <a href="login.html" class="btn">Comprar</a>
       </div>
 
-      <div>
-        <h4>Redes</h4>
-        <div class="socials">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
-        </div>
+      <!-- ⚠️ Esses produtos NÃO podem ser vendidos online -->
+      <div class="produto">
+        <img src="img/casquinha.jpg" alt="Casquinha">
+        <h3>Casquinha</h3>
+        <p>Disponível apenas na loja</p>
       </div>
+
+      <div class="produto">
+        <img src="img/sundae.jpg" alt="Sundae">
+        <h3>Sundae</h3>
+        <p>Disponível apenas na loja</p>
+      </div>
+
     </div>
+  </section>
 
-    <div class="copyright">
-      <p>&copy; <span id="year"></span> Gelato Dreams. Todos os direitos reservados.</p>
-    </div>
+  <!-- ===== CONTATO ===== -->
+  <section id="contato" class="section">
+    <h2>Fale Conosco</h2>
+    <form>
+      <input type="text" placeholder="Seu nome" required>
+      <input type="email" placeholder="Seu email" required>
+      <textarea placeholder="Sua mensagem" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>&copy; 2025 Sorveteria Delícias Geladas. Todos os direitos reservados.</p>
   </footer>
 
-  <!-- scripts -->
-  <script src="firebase-config.js"></script> <!-- coloque sua config do firebase aqui -->
-  <script src="app.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
