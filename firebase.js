@@ -1,28 +1,22 @@
-// Configuração Firebase (substitua com a sua)
+/* Salve como: firebase-config.js
+   -> Substitua os valores do firebaseConfig com as credenciais do seu projeto Firebase.
+   -> Mantenha esse arquivo seguro; em produção use regras do Firestore para proteger dados.
+*/
+
 const firebaseConfig = {
-    apiKey: "SUA_API_KEY",
-    authDomain: "SEU_AUTH_DOMAIN",
-    projectId: "SEU_PROJECT_ID",
-    storageBucket: "SEU_STORAGE_BUCKET",
-    messagingSenderId: "SEU_MESSAGING_SENDER_ID",
-    appId: "SEU_APP_ID"
+  apiKey: "COLOQUE_AQUI_SUA_APIKEY",
+  authDomain: "SEU-PROJ.firebaseapp.com",
+  projectId: "SEU-PROJ",
+  storageBucket: "SEU-PROJ.appspot.com",
+  messagingSenderId: "SENDER_ID",
+  appId: "APP_ID"
 };
 
-let db;
 try {
-    firebase.initializeApp(firebaseConfig);
-    db = firebase.firestore();
-} catch (error) {
-    console.log('Firebase demo mode');
-}
-
-// Funções
-export function saveOrder(orderData){
-    if(db) db.collection('orders').add(orderData);
-    console.log('Order saved:', orderData);
-}
-
-export function saveContact(contactData){
-    if(db) db.collection('contacts').add(contactData);
-    console.log('Contact saved:', contactData);
+  firebase.initializeApp(firebaseConfig);
+  window.db = firebase.firestore();
+  console.log('Firebase inicializado');
+} catch (err) {
+  console.warn('Firebase não inicializado; modo demo sem Firestore', err);
+  window.db = null;
 }
