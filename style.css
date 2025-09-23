@@ -1,0 +1,695 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configurações gerais do corpo da página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* ===== CABEÇALHO (HEADER) ===== */
+/* Estilo do cabeçalho fixo no topo da página */
+.header {
+    background: linear-gradient(135deg, #ff6b9d, #ff8e8e); /* Gradiente rosa - ALTERE AQUI para mudar as cores */
+    color: white;
+    padding: 1rem 0;
+    position: fixed; /* Fica fixo no topo ao rolar a página */
+    width: 100%;
+    top: 0;
+    z-index: 1000; /* Fica por cima de outros elementos */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #ffe4e1;
+}
+
+.mobile-menu {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* ===== SEÇÃO PRINCIPAL (HERO) ===== */
+/* Seção de destaque no topo da página */
+.hero {
+    /* TROCAR: Substitua este gradiente por uma imagem de fundo se desejar */
+    background: linear-gradient(135deg, #ff6b9d, #ff8e8e, #ffa8a8);
+    background: url('./fundo.png') center/cover;
+    /* Para usar imagem: background: url('caminho-da-sua-imagem.jpg') center/cover; */
+    color: rgb(73, 29, 29);
+    padding: 120px 0 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-button {
+    background: white;
+    color: #ff6b9d;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* ===== ESTILOS DAS SEÇÕES ===== */
+/* Espaçamento padrão para todas as seções */
+.section {
+    padding: 80px 0; /* Espaço em cima e embaixo de cada seção */
+}
+
+/* Container que centraliza o conteúdo */
+.container {
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    padding: 0 2rem; /* Espaçamento nas laterais */
+}
+
+/* Estilo dos títulos das seções */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #333; /* ALTERE AQUI para mudar cor dos títulos */
+    position: relative;
+}
+
+/* Linha decorativa embaixo dos títulos */
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #ff6b9d, #ff8e8e); /* ALTERE AQUI para mudar cor da linha */
+    border-radius: 2px;
+}
+
+/* ===== SEÇÃO DO CARDÁPIO ===== */
+/* Grade responsiva para os itens do cardápio */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Colunas automáticas, mínimo 300px */
+    gap: 2rem; /* Espaço entre os cards */
+    margin-top: 2rem;
+}
+
+/* Estilo de cada item do cardápio */
+.menu-item {
+    background: white;
+    border-radius: 15px; /* Cantos arredondados */
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra suave */
+    transition: transform 0.3s, box-shadow 0.3s; /* Animação suave */
+    text-align: center;
+}
+
+/* Efeito ao passar o mouse sobre o item */
+.menu-item:hover {
+    transform: translateY(-10px); /* Move para cima */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15); /* Sombra mais forte */
+}
+
+/* ===== ÍCONES/IMAGENS DOS SABORES ===== */
+/* 🖼️ CONFIGURAÇÕES DE TAMANHO DAS IMAGENS DOS SABORES */
+.ice-cream-icon {
+    font-size: 3rem; /* ALTERE AQUI: tamanho dos emojis (3rem = 48px) */
+    margin-bottom: 1rem;
+    display: block;
+    
+    /* 📏 CONFIGURAÇÕES PARA IMAGENS REAIS (descomente se usar imagens): */
+     width: 80px;           /*ALTERE: largura da imagem */
+     height: 80px;          /*ALTERE: altura da imagem */
+     object-fit: cover;     /*Mantém proporção da imagem */
+     border-radius: 50%;    /*OPCIONAL: deixa a imagem redonda */
+     margin: 0 auto 1rem;   /*Centraliza a imagem */
+    
+    /* 🎨 EFEITOS OPCIONAIS PARA IMAGENS: */
+    /* border: 3px solid #ff6b9d;  OPCIONAL: borda colorida */
+    /* box-shadow: 0 5px 15px rgba(0,0,0,0.1);  OPCIONAL: sombra */
+    /* transition: transform 0.3s ease;  OPCIONAL: animação suave */
+}
+
+/* 🖼️ EFEITO HOVER PARA IMAGENS (descomente se usar imagens) */
+/*
+.ice-cream-icon:hover {
+    transform: scale(1.1);  Aumenta 10% ao passar o mouse
+}
+*/
+
+.menu-item h3 {
+    color: #ff6b9d;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.menu-item p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff6b9d;
+}
+
+/* Stores Section */
+.stores-section {
+    background: #f8f9fa;
+}
+
+.store-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.store-card h3 {
+    color: #ff6b9d;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.store-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+}
+
+/* About Section */
+.about-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    align-items: center;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #666;
+}
+
+.about-features {
+    display: grid;
+    gap: 1rem;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.feature-icon {
+    background: linear-gradient(135deg, #ff6b9d, #ff8e8e);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* ===== SEÇÃO DO CARDÁPIO PDF ===== */
+/* Container da seção PDF com duas colunas */
+.pdf-menu-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas iguais */
+    gap: 4rem; /* Espaço entre as colunas */
+    align-items: center;
+    margin-top: 2rem;
+}
+
+/* Container do preview do PDF */
+.pdf-preview {
+    text-align: center;
+}
+
+/* TROCAR: Substitua o SVG por uma imagem real do seu cardápio PDF */
+.menu-pdf-preview {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+    /* Para usar imagem real: background: url('preview-cardapio.jpg') center/cover; */
+}
+
+/* Efeito hover no preview */
+.menu-pdf-preview:hover {
+    transform: scale(1.05); /* Aumenta ligeiramente ao passar o mouse */
+}
+
+.pdf-info h3 {
+    color: #ff6b9d;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.pdf-info p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.pdf-features {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.pdf-feature {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.pdf-feature i {
+    color: #ff6b9d;
+    font-size: 1.2rem;
+    width: 20px;
+}
+
+.pdf-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.pdf-download-btn, .pdf-view-btn {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pdf-download-btn {
+    display: inline-block;
+    padding: 20px 50px;              /* botão grande */
+    font-size: 1.3rem;               /* texto maior */
+    font-weight: bold;
+    color: #fff;                     /* cor do texto */
+    background: linear-gradient(135deg, #ff4da6, #ff1a75); /* rosa forte */
+    border: none;
+    border-radius: 12px;             /* cantos arredondados */
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(255, 77, 166, 0.4); /* sombra rosa */
+}
+
+/* Efeito ao passar o mouse */
+.pdf-download-btn:hover {
+    background: linear-gradient(135deg, #ff1a75, #e6005c); /* rosa mais escuro */
+    transform: translateY(-4px) scale(1.05); /* levanta e aumenta */
+    box-shadow: 0 12px 25px rgba(255, 26, 117, 0.5); /* sombra mais forte */
+}
+
+
+.pdf-view-btn {
+    background: transparent;
+    color: #ff6b9d;
+    border: 2px solid #ff6b9d;
+}
+
+.pdf-view-btn:hover {
+    background: #ff6b9d;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.pdf-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff6b9d;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* ===== SEÇÃO DE CONTATO ===== */
+/* Seção com gradiente de fundo - ALTERE as cores aqui se necessário */
+.contact-section {
+    background: linear-gradient(135deg, #ff6b9d, #ff8e8e); /* TROCAR: cores do gradiente */
+    color: white;
+}
+
+/* Grade responsiva para os itens de contato */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Colunas automáticas */
+    gap: 2rem; /* Espaço entre os cards */
+}
+
+/* Estilo de cada card de contato */
+.contact-item {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255,255,255,0.1); /* Fundo semi-transparente */
+    border-radius: 15px; /* Cantos arredondados */
+    backdrop-filter: blur(10px); /* Efeito de vidro fosco */
+}
+
+/* Ícones dos cards de contato */
+.contact-item i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* Títulos dos cards de contato */
+.contact-item h3 {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+/* Container dos links das redes sociais */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Estilo dos ícones das redes sociais */
+.social-links a {
+    color: white;
+    font-size: 1.5rem;
+    transition: transform 0.3s; /* Animação suave */
+}
+
+/* Efeito hover nas redes sociais */
+.social-links a:hover {
+    transform: scale(1.2); /* Aumenta o ícone */
+}
+
+/* ===== RODAPÉ ===== */
+/* Estilo do rodapé - ALTERE a cor de fundo se necessário */
+.footer {
+    background: #333; /* TROCAR: cor de fundo do rodapé */
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* Container do conteúdo do rodapé */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Links do rodapé */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap; /* Quebra linha em telas pequenas */
+}
+
+/* Estilo dos links do rodapé */
+.footer-links a {
+    color: #ccc; /* TROCAR: cor dos links */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Efeito hover nos links do rodapé */
+.footer-links a:hover {
+    color: #ff6b9d; /* TROCAR: cor do hover */
+}
+
+/* ===== RESPONSIVIDADE MOBILE ===== */
+/* Estilos para telas menores que 768px (tablets e celulares) */
+@media (max-width: 768px) {
+    /* Menu mobile - inicialmente escondido */
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #ff6b9d; /* TROCAR: cor de fundo do menu mobile */
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Menu mobile quando ativo */
+    .nav-menu.active {
+        display: flex;
+    }
+
+    /* Botão hambúrguer - aparece apenas no mobile */
+    .mobile-menu {
+        display: block;
+    }
+
+    /* Ajustes do título principal no mobile */
+    .hero h1 {
+        font-size: 2.5rem; /* Menor que no desktop */
+    }
+
+    /* Ajustes do subtítulo no mobile */
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    /* Títulos das seções menores no mobile */
+    .section-title {
+        font-size: 2rem;
+    }
+
+    /* Cardápio em coluna única no mobile */
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 📱 AJUSTES DAS IMAGENS NO MOBILE */
+    .ice-cream-icon {
+        font-size: 2.5rem; /* ALTERE: tamanho menor no mobile */
+        
+        /* Para imagens reais no mobile: */
+        /* width: 60px;   ALTERE: largura menor no mobile */
+        /* height: 60px;  ALTERE: altura menor no mobile */
+    }
+
+    /* Contato em coluna única no mobile */
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Links do rodapé em coluna no mobile */
+    .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    /* PDF em coluna única no mobile */
+    .pdf-menu-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    /* Botões do PDF em coluna no mobile */
+    .pdf-buttons {
+        flex-direction: column;
+    }
+
+    /* Estatísticas do PDF em coluna no mobile */
+    .pdf-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* ===== CONFIGURAÇÕES GERAIS ===== */
+/* Rolagem suave para toda a página */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===== ANIMAÇÃO DE CARREGAMENTO ===== */
+/* Spinner usado nos botões durante carregamento */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3); /* Borda transparente */
+    border-radius: 50%; /* Formato circular */
+    border-top-color: #fff; /* Parte superior branca */
+    animation: spin 1s ease-in-out infinite; /* Animação infinita */
+}
+
+/* Definição da animação de rotação */
+@keyframes spin {
+    to { transform: rotate(360deg); } /* Gira 360 graus */
+}
+/* Modal básico */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed; 
+    z-index: 2000; /* Fica acima de tudo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Permite scroll se necessário */
+    background-color: rgba(0,0,0,0.6); /* Fundo escuro transparente */
+  }
+  
+  .modal-content {
+    background-color: white;
+    margin: 10% auto; /* Centralizado vertical e horizontal */
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .modal-content img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+  }
+  
+  .close-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff6b9d;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .close-btn:hover {
+    color: #e6005c;
+  }
+  
+
+/* ======================================= */
+/* FINAL DO ARQUIVO CSS - GELATO PREMIUM  */
+/* ======================================= */
